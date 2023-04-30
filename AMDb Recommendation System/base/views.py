@@ -15,7 +15,12 @@ class UserRecommendationView(LoginRequiredMixin, View):
         context = {}
         current_user = request.user
         recommendation = current_user.recommendations.filter(is_active=True, method=RecommendationMethods.CONTENT).first()
-        movie_ids = [item.strip() for item in recommendation.movies.split(',')]
+        
+        if recommendation:
+            movie_ids = [item.strip() for item in recommendation.movies.split(',')]
+        else:
+            movie_ids = []
+
         recommended_movies = []
         for movie_id in movie_ids:
             try:
@@ -24,8 +29,14 @@ class UserRecommendationView(LoginRequiredMixin, View):
             except Movie.DoesNotExist:
                 pass
         context["recommendations_content"] = recommended_movies
+
         recommendation = current_user.recommendations.filter(is_active=True, method=RecommendationMethods.COLLABORATIVE).first()
-        movie_ids = [item.strip() for item in recommendation.movies.split(',')]
+        
+        if recommendation:
+            movie_ids = [item.strip() for item in recommendation.movies.split(',')]
+        else:
+            movie_ids = []
+
         recommended_movies = []
         for movie_id in movie_ids:
             try:
@@ -35,5 +46,3 @@ class UserRecommendationView(LoginRequiredMixin, View):
                 pass
         context["recommendations_collaborative"] = recommended_movies
         return render(request, self.template_name, context)
-        
-    
