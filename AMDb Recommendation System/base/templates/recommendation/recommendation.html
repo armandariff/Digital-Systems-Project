@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'recommendation/css/recommendation.css'%}">
+<div class='recommendations'>
+
+    <h4> Content Based Recommendations </h4>
+
+    <div class='recommendation'>
+        {% for movie in recommendations_content %}
+            <a class="movie elevated" href="{% url 'movie-detail' movie.pk %}">
+
+                <!-- movie Image -->
+                <div class="movie-img">
+                    {% if movie.image %}
+                        <img src="{{ movie.image }}" alt="movie Image">
+                    {% else %}
+                        <img src="https://picsum.photos/200" alt="movie Image">
+                    {% endif %}
+                </div>
+
+                <!-- movies other info -->
+                <div class="movie-info">
+
+                    <div class="info">
+                        Title: {{ movie.title }} <br>
+                        {% comment %} Owner: {% if movie.owner.profile.first_name %}{{ movie.owner.profile.first_name }} {{ movie.owner.profile.last_name }}{% else %}{{movie.owner}}{% endif %} <br> {% endcomment %}
+                        
+                        Genre: {% for genre in movie.genre_list %} {{ genre.name }}, {% endfor %} <br>
+                    </div>
+
+                    <div class="bottom-wrapper">
+                        <div class="review-list">
+                            <span class="fa fa-star checked"></span> {{ movie.rating_avg }} ({{ movie.review_count }} Reviews)
+                        </div>
+                        <div class="price">{{ movie.release_date }}</div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <hr color="grey">
+    <h4> Collaborative Recommendations </h4>
+
+    <div class='recommendation'>
+        {% for movie in recommendations_collaborative %}
+            <a class="movie elevated" href="{% url 'movie-detail' movie.pk %}">
+
+                <!-- movie Image -->
+                <div class="movie-img">
+                    {% if movie.image %}
+                        <img src="{{ movie.image }}" alt="movie Image">
+                    {% else %}
+                        <img src="https://picsum.photos/200" alt="movie Image">
+                    {% endif %}
+                </div>
+
+                <!-- movies other info -->
+                <div class="movie-info">
+
+                    <div class="info">
+                        Title: {{ movie.title }} <br>
+                        {% comment %} Owner: {% if movie.owner.profile.first_name %}{{ movie.owner.profile.first_name }} {{ movie.owner.profile.last_name }}{% else %}{{movie.owner}}{% endif %} <br> {% endcomment %}
+                        
+                        Genre: {% for genre in movie.genre_list %} {{ genre.name }}, {% endfor %} <br>
+                    </div>
+
+                    <div class="bottom-wrapper">
+                        <div class="review-list">
+                            <span class="fa fa-star checked"></span> {{ movie.rating_avg }} ({{ movie.review_count }} Reviews)
+                        </div>
+                        <div class="price">{{ movie.release_date }}</div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

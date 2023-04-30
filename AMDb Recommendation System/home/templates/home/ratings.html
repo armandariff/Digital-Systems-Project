@@ -1,0 +1,43 @@
+<!-- Rating Thing  -->
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'home/css/ratings.css'%}">
+<script src="{% static 'home/js/ratings.js'%}"></script>
+
+<div class='ratings' id='ratings'>
+    <div class='rating-wrapper'>
+        <button onclick="rated(1,{{ movie.id }});">
+            <span id = '{{movie.id}}star1' class="fa fa-star unchecked"></span>
+        </button>
+        <button onclick="rated(2,{{ movie.id }});">
+            <span id = '{{movie.id}}star2' class="fa fa-star unchecked"></span>
+        </button>
+        <button onclick="rated(3,{{ movie.id }});">
+            <span id = '{{movie.id}}star3' class="fa fa-star unchecked"></span>
+        </button>
+        <button onclick="rated(4,{{ movie.id }});">
+            <span id = '{{movie.id}}star4' class="fa fa-star unchecked"></span>
+        </button>
+        <button onclick="rated(5,{{ movie.id }});">
+            <span id = '{{movie.id}}star5' class="fa fa-star unchecked"></span>
+        </button>
+    </div>
+    <button class="btn btn-secondary" onclick="clearall({{ movie.id }})">Clear All</button>
+</div>
+
+<script>
+    var token = '{{ csrf_token }}';
+    var initial_rating = '{{ rating }}';
+    var movie_id = '{{ movie.id }}';
+
+    {% comment %} To set ratings right {% endcomment %}
+    const some = () => {
+        for(var i = 1; i <= initial_rating; i++){
+            document.getElementById(movie_id+'star'+String(i)).className = 'fa fa-star checked';
+        }
+    };
+    some();
+</script>
+<!-- Rating Thing Ends Here -->
+{% endblock %}

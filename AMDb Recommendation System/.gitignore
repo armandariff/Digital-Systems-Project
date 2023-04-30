@@ -1,0 +1,5 @@
+db*
+*__py*
+.DS_Store
+*.pyc
+env

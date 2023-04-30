@@ -1,0 +1,145 @@
+/* Links CSS */
+
+a:any-link {
+    color: unset;
+    text-decoration: none;
+}
+
+a:active {
+    color: unset;
+}
+
+.main {
+    display: grid;
+    justify-content: stretch;
+}
+
+.list-main {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1em;
+    row-gap: 1em;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+.list-main div.movies {
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 1em;
+    /* background-color: aqua; */
+}
+
+.movies div.movie-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 1em;
+    row-gap: 1em;
+}
+
+.movies div.filter-area {
+    padding: 2em 1em 2em 1em;
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 1em;
+}
+
+.filter-area div.filters {
+    display: flex;
+    justify-content: start;
+    column-gap: 1em;
+    row-gap: 0.5em;
+    flex-wrap: wrap;
+}
+
+.filters button {
+    padding: 0.3em;
+    border-radius: 100px;
+    box-shadow: 0px 0px 8px hsl(0, 1%, 78%);
+    background-color: white;
+    border: none;
+}
+
+.movies .movie {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: auto;
+    column-gap: 1em;
+    justify-content: start;
+    width: 100%;
+}
+
+.movie-img {
+    width: 100%;
+    height: 200px;
+}
+
+.movie-img img {
+    border-radius: 3%;
+    width: 100%;
+    height: 100%;
+}
+
+.movie div.movie-info {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.movie-info div.bottom-wrapper {
+    width: 100%;
+    align-self: end;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
+
+.movie-info div.bottom-wrapper .price {
+    text-align: right;
+}
+
+.movies div.pagination {
+    display: grid;
+    color: white;
+    width: 100%;
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-main div.map {
+    height: 100%;
+    width: 100%;
+}
+
+.list-main div.map div {
+    width: 100%;
+    height: 100% !important;
+}
+
+@media only screen and (max-width: 850px){
+
+    .list-main {
+        grid-template-columns: auto;
+    }
+    
+    .list-main div.map {
+        padding: 1em;
+    }
+}
+
+@media only screen and (max-width: 550px){
+
+    .movies .movie {
+        /* padding: 1em; */
+        /* display: grid; */
+        grid-template-columns: 1fr;
+        /* column-gap: 1em; */
+        /* justify-content: start; */
+    }
+
+    .list-main div.map {
+        padding: 1em;
+    }
+    
+}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'home/css/movie_list.css'%}">
+
+<div class="main list-main">
+    <!-- All movies view is here -->
+    <div class="movies">
+        <div class="filter-area">
+            <h3>Welcome to AMDb</h3>
+
+            <div class="filters">
+                {% for filter in filters %}
+                <form action="{% url 'movie-list' %}">
+                    <input type="hidden" name="q" value="{{filter.name}}">
+                    <button type="submit" class="one">{{filter.name}}</button>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="movie-wrapper">
+        {% for movie in movies %}
+            <a class="movie elevated" href="{% url 'movie-detail' movie.pk %}">
+
+                <!-- movie Image -->
+                <div class="movie-img">
+                    {% if movie.image %}
+                        <img src="{{ movie.image }}" alt="movie Image">
+                    {% else %}
+                        <img src="https://picsum.photos/200" alt="movie Image">
+                    {% endif %}
+                </div>
+
+                <!-- movies other info -->
+                <div class="movie-info">
+
+                    <div class="info">
+                        Title: {{ movie.title }} <br>
+                        {% comment %} Owner: {% if movie.owner.profile.first_name %}{{ movie.owner.profile.first_name }} {{ movie.owner.profile.last_name }}{% else %}{{movie.owner}}{% endif %} <br> {% endcomment %}
+                        
+                        Genre: {% for genre in movie.genre_list %} {{ genre.name }}, {% endfor %} <br>
+                    </div>
+
+                    <div class="bottom-wrapper">
+                        <div class="review-list">
+                            <span class="fa fa-star checked"></span> {{ movie.rating_avg }} ({{ movie.review_count }} Reviews)
+                        </div>
+                        <div class="price">{{ movie.release_date }}</div>
+                    </div>
+                </div>
+                <form action="{% url 'add-watch-list' %}" method="POST">
+                    {% csrf_token %}
+                    <input type='hidden' value={{ movie.id }} name='movies'>
+                    <input type='hidden' name='rating' value='0.0'>
+                    <input class='btn checked-bg' type='submit' value='Add to WatchList'>
+                </form>
+            </a>
+            
+        {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}" class="btn checked-bg">Previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}" class="btn checked-bg">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

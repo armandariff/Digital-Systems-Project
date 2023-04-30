@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'home/css/movie_list.css'%}">
+<script src="{% static 'home/css/movie_list.js'%}"></script>
+
+<div class="main list-main">
+    <!-- All movies view is here -->
+    <div class="movies">
+        <div class="filter-area">
+            <h3>Watchlist</h3>
+
+            <div class="filters">
+                <button class="one">Fantasy</button>
+                <button class="one">Adventure</button>
+                <button class="one">Action</button>
+                <button class="one">Drama</button>
+            </div>
+        </div>
+        <div class="movie-wrapper">
+        {% for watch in watchlist %}
+            <a class="movie elevated" href="{% url 'movie-detail' watch.movies.pk %}">
+
+                <!-- movie Image -->
+                <div class="movie-img">
+                    {% if watch.movies.image %}
+                        <img src="{{ watch.movies.image }}" alt="movie Image">
+                    {% else %}
+                        <img src="https://picsum.photos/200" alt="movie Image">
+                    {% endif %}
+                </div>
+
+                <!-- movies other info -->
+                <div class="movie-info">
+
+                    <div class="info">
+                        Title: {{ watch.movies.title }} <br>
+                        {% comment %} Owner: {% if movie.owner.profile.first_name %}{{ movie.owner.profile.first_name }} {{ movie.owner.profile.last_name }}{% else %}{{movie.owner}}{% endif %} <br> {% endcomment %}
+                        
+                        Genre: {{ watch.movies.genre }} <br>
+                    </div>
+
+                    <div class="bottom-wrapper">
+                        <div class="review-list">
+                            <span class="fa fa-star checked"></span> {{ watch.movies.popularity }} ({{ watch.movies.revenue }} Reviews)
+                        </div>
+                        <div class="price">{{ watch.movies.release_date }}</div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}" class="btn checked-bg">Previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}" class="btn checked-bg">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

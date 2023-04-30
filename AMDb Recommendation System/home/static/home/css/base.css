@@ -1,0 +1,32 @@
+.checked {
+    color: rgb(0, 0, 0);
+}
+
+.checked-bg {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.elevated {
+    box-shadow: 0px 0px 8px hsl(0, 1%, 78%);
+    border-radius: 10px;
+    padding: 1em;
+}
+
+body {
+    display: grid;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+.main {
+    display: grid;
+    justify-content: center;
+    align-items: start;
+}
+
+/*forms styles*/
+.form {
+    display: grid;
+    justify-content: center;
+}

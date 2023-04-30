@@ -1,0 +1,24 @@
+{% extends 'base.html'%} {% block content%} {% load crispy_forms_tags %}
+<form action="{%url 'login'%}" method="POST" class="form elevated">
+  {% csrf_token %}
+
+  <fieldset class="border p-2">
+    <legend class="w-auto">Welcome to Cinema</legend>
+    {{ form|crispy }}
+  </fieldset>
+
+  <button class="btn checked-bg" type="submit">Login</button>
+</form>
+
+<div class="border-top pt-3">
+  <small class="text-muted">
+    Don't have an account? <a class="ml-2" href="{%url 'register'%}">Sign Up</a>
+  </small>
+</div>
+
+<div class="border-top pt-3">
+  <small class="text-muted">
+    <a href="{%url 'home'%}">Forgot Password?</a>
+  </small>
+</div>
+{% endblock %}

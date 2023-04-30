@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block content %}  
+<link rel="stylesheet" href="{%static 'home/css/movie_detail.css'%}">     
+
+    <!-- movie Details  -->
+    <div class="detail-main main">
+
+        <!-- movie name and address -->
+        <div class="head">  
+            <div class="name">{{ movie.title }}</div>
+
+            <div>
+                
+            </div>
+
+            <span class="review"><span class="fa fa-star checked"></span> {{ movie.popularity }} <span class="address"> {{ movie.release_date }} </span> </span> 
+        </div>
+
+        <hr color="grey">
+
+        <!-- movie Images -->
+        <div class="images">
+            {% comment %} {% for photo in photos %} {% endcomment %}
+                <img src="{% if movie.image %} {{ movie.image }} {% else %} https://picsum.photos/200 {% endif %}" alt='img'>
+            {% comment %} {% endfor %} {% endcomment %}
+        </div>
+
+        <!-- Owner-Information -->
+        <div class="mid-wrapper">
+
+            <!-- Left Side part that is owner info -->
+            <div class="left-side">
+                <div class="owner-info">
+
+                    <div class="wrapper">
+                        <div class="name">
+                            {% comment %} {{ movie.building_name }} is hosted by <a href="{% url 'owner-profile' movie.owner.id %}">{% if movie.owner.profile.first_name %}{{ movie.owner.profile.first_name }} {{ movie.owner.profile.last_name }}{% else %}{{movie.owner}}{% endif %}</a> {% endcomment %}
+                        </div>
+                        <div class="movie-info">
+                            Genere: {% for genre in movie.genre_list %} {{ genre.name }}, {% endfor %} <br>
+                            Revenue: {{ movie.revenue }} 
+                        </div>
+                    </div>
+
+                    {% comment %} <a href="{% url 'owner-profile' movie.owner.id %}">
+                        <div class="owner-image">
+                            <img src="{% if movie.owner.profile.avatar %} {{ movie.owner.profile.avatar.url }} {% else %} https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png {% endif %}" alt="">
+                        </div> 
+                    </a> {% endcomment %}
+                </div>
+
+                <hr color="grey">
+
+                <div class="movie-discription">
+                    <strong>Description</strong>
+                    {{ movie.overview }}
+                </div>
+            </div>
+
+        </div>
+        <!-- Mid wrapper Ends here -->
+
+
+        <hr color="grey">
+
+        <h4><span class="fa fa-star checked"></span> {{ movie.rating_avg }} - {{ movie.reviews_count }} Reviews</h4>
+        <div class="reviews">    
+            {% for review in movie.get_reviews %}
+                <div class="review {% if review.user_rated == request.user %}highlight-review{% endif %}">
+
+                    <!-- Top part -->
+                    <div class="user-info">
+                        <div class="user-img">
+                            <img src="{% if review.user_rated.profile.avatar.url %} {{ review.user_rated.profile.avatar.url }} {% else %} https://picsum.photos/200 {% endif %}" alt="">
+                        </div>
+                        <div class="info">
+                            <span class="name">{{ review.user_rated.username }}</span>
+                            <span class="edited_at"><small>{{ review.edited_at }}</small></span>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        {{ review.comment }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        {% include 'home/ratings.html' %}
+
+        <hr color="grey">
+
+        <div class="movie-wrapper">
+        {% for movie in similar_movies %}
+            <a class="movie elevated" href="{% url 'movie-detail' movie.pk %}">
+
+                <!-- movie Image -->
+                <div class="movie-img">
+                    {% if movie.image %}
+                        <img src="{{ movie.image }}" alt="movie Image">
+                    {% else %}
+                        <img src="https://picsum.photos/200" alt="movie Image">
+                    {% endif %}
+                </div>
+
+                <!-- movies other info -->
+                <div class="movie-info">
+
+                    <div class="info">
+                        Title: {{ movie.title }} <br>
+                        {% comment %} Owner: {% if movie.owner.profile.first_name %}{{ movie.owner.profile.first_name }} {{ movie.owner.profile.last_name }}{% else %}{{movie.owner}}{% endif %} <br> {% endcomment %}
+                        
+                        Genre: {% for genre in movie.genre_list %} {{ genre.name }}, {% endfor %} <br>
+                    </div>
+
+                    <div class="bottom-wrapper">
+                        <div class="review-list">
+                            <span class="fa fa-star checked"></span> {{ movie.rating_avg }} ({{ movie.review_count }} Reviews)
+                        </div>
+                        <div class="price">{{ movie.release_date }}</div>
+                    </div>
+                </div>
+                <form action="{% url 'add-watch-list' %}" method="POST">
+                    {% csrf_token %}
+                    <input type='hidden' value={{ movie.id }} name='movies'>
+                    <input type='hidden' name='rating' value='0.0'>
+                    <input class='btn checked-bg' type='submit' value='Add to WatchList'>
+                </form>
+            </a>
+            
+        {% endfor %}
+        </div>
+
+        <hr color="grey">
+        
+    </div>
+        
+{% endblock %}

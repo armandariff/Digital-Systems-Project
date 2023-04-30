@@ -1,0 +1,34 @@
+.checked {
+    color: rgb(64, 129, 194);
+    /* background-color: orangered; */
+}
+
+
+div.ratings {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    column-gap: 2em;
+}
+
+.ratings button {
+    /* color: white; */
+    background-color: rgb(64, 129, 194);
+    border-color: white;
+    box-shadow: none;
+    border-radius: 1%;
+}
+
+div.rating-wrapper button {
+    /* color: white; */
+    background-color: white;
+    border-color: white;
+    box-shadow: none;
+    border-radius: 1%;
+}
+
+.rating-wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    /* justify-content: start; */
+}

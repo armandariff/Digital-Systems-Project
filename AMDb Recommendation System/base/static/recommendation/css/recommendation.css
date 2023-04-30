@@ -1,0 +1,40 @@
+a:any-link {
+    color: unset;
+    text-decoration: none;
+}
+
+a:active {
+    color: unset;
+}
+
+/* .main {
+    display: grid;
+    justify-content: stretch;
+} */
+
+.list-main {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1em;
+    row-gap: 1em;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+div.recommendations {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1em;
+    row-gap: 1em;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+div.recommendation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 1em;
+    row-gap: 1em;
+}

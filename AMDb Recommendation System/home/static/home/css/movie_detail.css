@@ -1,0 +1,254 @@
+.main {
+    display: grid;
+    justify-content: stretch;
+}
+
+.detail-main {
+    padding: 1em 2em 1em 2em;
+    display: grid;
+    justify-content: stretch;
+    row-gap: 1em;
+}
+
+hr {
+    /* background: rgb(187, 186, 186); */
+    box-shadow: 0px 0px 8px hsl(0, 1%, 78%);
+    width: 100%;
+    height: 0.5px;
+}
+
+.detail-main div {
+    display: grid;
+    row-gap: 1em;
+}
+
+.head .name {
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.head {
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+.head span.address {
+    color: rgb(146, 143, 143);
+}
+
+.head .edit-btn {
+    justify-self: right;
+    color: white;
+}
+
+.detail-main div.images {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 1em;
+}
+
+.detail-main div.images img {
+    width: 350px;
+    height: 200px;
+}
+
+.detail-main div.mid-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2em;
+    align-items: start;
+}
+
+.detail-main div.movie-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 1em;
+    row-gap: 1em;
+}
+
+.movies .movie {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: auto;
+    column-gap: 1em;
+    justify-content: end;
+    width: 100%;
+}
+
+.movie-img {
+    width: 100%;
+    /* height: 200px; */
+}
+
+.movie-img img {
+    border-radius: 3%;
+    width: 100%;
+    height: 100%;
+}
+
+.movie div.movie-info {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.movie-info div.bottom-wrapper {
+    width: 100%;
+    align-self: end;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
+
+div.review-list {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
+
+.movie-info div.bottom-wrapper .price {
+    text-align: right;
+}
+
+.owner-info {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
+
+.owner-info div.name {
+    font-size: 1.6em;
+    font-weight: 500;
+}
+
+.owner-info div.owner-image img {
+    width: 60px;
+    border-radius: 100px;
+}
+
+.booking-form {
+    justify-content: center;
+    /* padding: 2em; */
+}
+
+.booking-form div.form {
+    /* position: fixed; */
+    border-radius: 5px;
+    padding: 2em;
+    box-shadow: 0px 0px 8px hsl(0, 1%, 78%);
+}
+
+.booking-form div.top-wrapper {
+    /* width: 100%; */
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    column-gap: 1em;
+}
+
+.booking-form div.top-wrapper .review {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: right;
+}
+
+.booking-form fieldset {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 1em;
+}
+
+.booking-form #div_id_booked_from {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.booking-form #div_id_booked_to {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.booking-form div.alert {
+    grid-column: 1 / 3;
+}
+
+.booking-form button {
+    width: 100%;
+    color: white;
+    border-radius: 5px;
+}
+
+.reviews {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 1em;
+}
+
+.reviews div {
+    display: grid;
+}
+
+.review div.user-info {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    column-gap: 1em;
+}
+
+.review div.user-img img {
+    width: 50px;
+    border-radius: 100%;
+}
+
+.reviews .highlight-review {
+    background-color: rgb(240, 236, 236);
+    border-radius: 5px;
+}
+
+.user-info div.info {
+    display: grid;
+    align-items: start;
+    row-gap: 0;
+}
+
+.user-info div.info .name {
+    font-weight: 500;
+}
+
+.detail-main a.leave-review {
+    align-self: center;
+    justify-self: center;
+    color: white;
+}
+
+.detail-main div.map {
+    height: 50%;
+    width: 60%;
+    padding: 1em;
+    justify-self: center;
+}
+
+.detail-main div.map div {
+    width: 100%;
+    height: 100% !important;
+}
+
+@media only screen and (max-width: 680px) {
+    .detail-main div.images {
+        display: grid;
+        grid-template-columns: auto;
+        column-gap: 1em;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    
+    .reviews {
+        grid-template-columns: auto;
+    }
+
+    .detail-main div.mid-wrapper {
+        grid-template-columns: auto;
+    }
+}
